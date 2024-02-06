@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="universidad" name="hibernate.Persona"
+		table="persona">
+		<id name="id" type="int">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property generated="never" lazy="false" name="nif"
+			type="string">
+			<column length="9" name="nif" />
+		</property>
+		<property generated="never" lazy="false" name="nombre"
+			type="string">
+			<column length="25" name="nombre" />
+		</property>
+		<property generated="never" lazy="false" name="apellido1"
+			type="string">
+			<column length="50" name="apellido1" />
+		</property>
+		<property generated="never" lazy="false" name="apellido2"
+			type="string">
+			<column length="50" name="apellido2" />
+		</property>
+		<property generated="never" lazy="false" name="ciudad"
+			type="string">
+			<column length="25" name="ciudad" />
+		</property>
+		<property generated="never" lazy="false" name="direccion"
+			type="string">
+			<column length="50" name="direccion" />
+		</property>
+		<property generated="never" lazy="false" name="telefono"
+			type="string">
+			<column length="9" name="telefono" />
+		</property>
+		<property name="fechaNacimiento" type="date">
+			<column name="fecha_nacimiento" />
+		</property>
+		<property name="sexo" type="string">
+			<column name="sexo" length="5" />
+		</property>
+		<property name="tipo" type="string">
+			<column name="tipo" length="10" />
+		</property>
+		<one-to-one class="hibernate.Profesor" name="profesor" />
+		<set fetch="select" inverse="true" lazy="true"
+			name="alumnoSeMatriculaAsignaturas"
+			table="alumno_se_matricula_asignatura">
+			<key>
+				<column name="id_alumno" not-null="true" />
+			</key>
+			<one-to-many class="hibernate.AlumnoSeMatriculaAsignatura" />
+		</set>
+	</class>
+</hibernate-mapping>

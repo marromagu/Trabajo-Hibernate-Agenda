@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="hibernate.AlumnoSeMatriculaAsignatura"
+		table="alumno_se_matricula_asignatura" catalog="universidad"
+		optimistic-lock="none">
+		<composite-id class="hibernate.AlumnoSeMatriculaAsignaturaId"
+			name="alumnoMatriculaCursoId">
+			<key-property name="idAlumno" type="int">
+				<column name="id_alumno" />
+			</key-property>
+			<key-property name="idAsignatura" type="int">
+				<column name="id_asignatura" />
+			</key-property>
+			<key-property name="idCursoEscolar" type="int">
+				<column name="id_curso_escolar" />
+			</key-property>
+		</composite-id>
+		<many-to-one class="hibernate.Persona" fetch="select"
+			insert="false" name="alumno" update="false">
+			<column name="id_alumno" not-null="true" />
+		</many-to-one>
+		<many-to-one class="hibernate.Asignatura" fetch="select"
+			insert="false" name="asignatura" update="false">
+			<column name="id_asignatura" not-null="true" />
+		</many-to-one>
+		<many-to-one class="hibernate.CursoEscolar" fetch="select"
+			insert="false" name="cursoEscolar" update="false">
+			<column name="id_curso_escolar" not-null="true" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>
